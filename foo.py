@@ -2,6 +2,7 @@ N = 4
 
 class Transposition:
     def __init__(self, i, j):
+        assert i >= 1
         assert i < j
         assert j <= N
         self.i = i
