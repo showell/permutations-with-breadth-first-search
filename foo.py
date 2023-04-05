@@ -1,5 +1,21 @@
 N = 4
 
+def breadth_first_search(orig, *, neighbors):
+    q = [orig]
+    depth_dict = dict()
+    depth_dict[orig] = 0
+    depth = 0
+    while q:
+        depth += 1
+        new_q = []
+        for obj in q:
+            for neighbor in neighbors(obj):
+                if neighbor not in depth_dict:
+                    depth_dict[neighbor] = depth
+                    new_q.append(neighbor)
+        q = new_q
+    return depth_dict
+
 class Transposition:
     def __init__(self, i, j):
         assert i >= 1
@@ -53,22 +69,6 @@ class Permutation:
 
     def __hash__(self):
         return hash(tuple(self.lst))
-
-def breadth_first_search(orig, *, neighbors):
-    q = [orig]
-    depth_dict = dict()
-    depth_dict[orig] = 0
-    depth = 0
-    while q:
-        depth += 1
-        new_q = []
-        for obj in q:
-            for neighbor in neighbors(obj):
-                if neighbor not in depth_dict:
-                    depth_dict[neighbor] = depth
-                    new_q.append(neighbor)
-        q = new_q
-    return depth_dict
 
 orig = Permutation(list(range(1, N+1)), [])
 distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
