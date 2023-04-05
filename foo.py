@@ -1,3 +1,5 @@
+print("<pre>")
+
 N = 4
 
 def breadth_first_search(top, *, neighbors):
@@ -37,9 +39,8 @@ def make_transpositions():
     return transpositions
     
 
-print("<pre>")
-print("all transpositions:")
 transpositions = make_transpositions()
+print("all transpositions:")
 for t in transpositions:
     print(t)
 
