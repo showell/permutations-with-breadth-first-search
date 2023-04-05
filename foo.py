@@ -51,24 +51,24 @@ class Permutation:
     def __hash__(self):
         return hash(tuple(self.lst))
 
-def breadth_first_search(orig):
+def breadth_first_search(orig, *, neighbors):
     q = [orig]
-    distance = dict()
-    distance[orig] = 0
-    dist = 0
+    depth_dict = dict()
+    depth_dict[orig] = 0
+    depth = 0
     while q:
-        dist += 1
+        depth += 1
         new_q = []
         for obj in q:
-            for neighbor in obj.neighbors():
-                if neighbor not in distance:
-                    distance[neighbor] = dist
+            for neighbor in neighbors(obj):
+                if neighbor not in depth_dict:
+                    depth_dict[neighbor] = depth
                     new_q.append(neighbor)
         q = new_q
-    return distance
+    return depth_dict
 
 orig = Permutation([1, 2, 3, 4, 5])
-distance = breadth_first_search(orig)
+distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
 
 print("all permutations:")
 for p, d in distance.items():
