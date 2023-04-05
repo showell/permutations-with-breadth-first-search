@@ -34,14 +34,15 @@ def make_transpositions():
         for j in range(i+1, N):
             t = Transposition(i+1, j+1)
             transpositions.append(t)
-
-    for t in transpositions:
-        print(t)
     return transpositions
+    
 
 print("<pre>")
 print("all transpositions:")
 transpositions = make_transpositions()
+for t in transpositions:
+    print(t)
+
 print()
 
 class Permutation:
