@@ -1,9 +1,9 @@
 N = 4
 
-def breadth_first_search(orig, *, neighbors):
-    q = [orig]
+def breadth_first_search(top, *, neighbors):
+    q = [top]
     depth_dict = dict()
-    depth_dict[orig] = 0
+    depth_dict[top] = 0
     depth = 0
     while q:
         depth += 1
