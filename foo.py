@@ -29,7 +29,7 @@ print()
 
 class Permutation:
     def __init__(self, lst, transpositions):
-        assert set(lst) == {1, 2, 3, 4, 5}
+        assert set(lst) == set(range(1, N+1))
         self.lst = lst
         self.transpositions = transpositions
         
@@ -69,7 +69,7 @@ def breadth_first_search(orig, *, neighbors):
         q = new_q
     return depth_dict
 
-orig = Permutation([1, 2, 3, 4, 5], [])
+orig = Permutation(list(range(1, N+1)), [])
 distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
 
 print("all permutations:")
