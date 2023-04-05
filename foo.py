@@ -1,7 +1,5 @@
 print("<pre>")
 
-N = 4
-
 def breadth_first_search(top, *, neighbors):
     q = [top]
     depth_dict = dict()
@@ -17,6 +15,8 @@ def breadth_first_search(top, *, neighbors):
                     new_q.append(neighbor)
         q = new_q
     return depth_dict
+
+N = 4
 
 class Transposition:
     def __init__(self, i, j):
