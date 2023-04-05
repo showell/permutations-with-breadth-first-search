@@ -3,19 +3,19 @@ N = 4
 class Transposition:
     def __init__(self, i, j):
         assert i < j
-        assert j < N
+        assert j <= N
         self.i = i
         self.j = j
 
     def __str__(self):
-        return f"({self.i +1}{self.j + 1})"
+        return f"({self.i}{self.j})"
 
 
 def make_transpositions():
     transpositions = []
     for i in range(N):
         for j in range(i+1, N):
-            t = Transposition(i, j)
+            t = Transposition(i+1, j+1)
             transpositions.append(t)
 
     for t in transpositions:
@@ -35,8 +35,8 @@ class Permutation:
         
     def neighbor(self, t):
         lst = self.lst[:]
-        i = lst.index(t.j + 1)
-        j = lst.index(t.i + 1)
+        i = lst.index(t.j)
+        j = lst.index(t.i)
         (lst[i], lst[j]) = (lst[j], lst[i])
         return Permutation(lst, self.transpositions + [t])
 
