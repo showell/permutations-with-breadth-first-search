@@ -1,7 +1,9 @@
+N = 5
+
 class Transposition:
     def __init__(self, i, j):
         assert i < j
-        assert j < 7
+        assert j < N
         self.i = i
         self.j = j
 
@@ -11,8 +13,8 @@ class Transposition:
 
 def make_transpositions():
     transpositions = []
-    for i in range(7):
-        for j in range(i+1, 7):
+    for i in range(N):
+        for j in range(i+1, N):
             t = Transposition(i, j)
             transpositions.append(t)
 
@@ -20,16 +22,19 @@ def make_transpositions():
         print(t)
     return transpositions
 
+print("<pre>")
 transpositions = make_transpositions()
 
 class Permutation:
     def __init__(self, lst):
-        assert set(lst) == {1, 2, 3, 4, 5, 6, 7}
+        assert set(lst) == {1, 2, 3, 4, 5}
         self.lst = lst
         
     def neighbor(self, t):
         lst = self.lst[:]
-        (lst[t.i], lst[t.j]) = (lst[t.j], lst[t.i])
+        i = lst.index(t.j + 1)
+        j = lst.index(t.i + 1)
+        (lst[i], lst[j]) = (lst[j], lst[i])
         return Permutation(lst)
 
     def neighbors(self):
@@ -60,11 +65,13 @@ def breadth_first_search(orig):
         q = new_q
     return distance
 
-orig = Permutation([1, 2, 3, 4, 5, 6, 7])
+orig = Permutation([1, 2, 3, 4, 5])
 distance = breadth_first_search(orig)
 
 for p, d in distance.items():
-    print(p, d)
+    print(d, p)
 
-for i in range(7):
+for i in range(N):
     print(i, len([d for d in distance.values() if d == i]))
+
+print("</pre>")
