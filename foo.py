@@ -1,4 +1,4 @@
-N = 5
+N = 4
 
 class Transposition:
     def __init__(self, i, j):
