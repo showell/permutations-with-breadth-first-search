@@ -23,7 +23,9 @@ def make_transpositions():
     return transpositions
 
 print("<pre>")
+print("all transpositions:")
 transpositions = make_transpositions()
+print()
 
 class Permutation:
     def __init__(self, lst):
@@ -68,9 +70,12 @@ def breadth_first_search(orig):
 orig = Permutation([1, 2, 3, 4, 5])
 distance = breadth_first_search(orig)
 
+print("all permutations:")
 for p, d in distance.items():
     print(d, p)
+print()
 
+print("distance counts")
 for i in range(N):
     print(i, len([d for d in distance.values() if d == i]))
 
