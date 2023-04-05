@@ -47,17 +47,20 @@ for t in transpositions:
 print()
 
 class Permutation:
-    def __init__(self, lst, transpositions):
+    def __init__(self, lst, *, parent, transposition):
+        if parent is None:
+            assert transposition is None
         assert set(lst) == set(range(1, LIST_SIZE+1))
         self.lst = lst
-        self.transpositions = transpositions
+        self.parent = parent
+        self.transposition = transposition
         
     def neighbor(self, t):
         lst = self.lst[:]
         i = lst.index(t.j)
         j = lst.index(t.i)
         (lst[i], lst[j]) = (lst[j], lst[i])
-        return Permutation(lst, self.transpositions + [t])
+        return Permutation(lst, parent=self, transposition=t)
 
     def neighbors(self):
         return [self.neighbor(t) for t in transpositions]
@@ -66,13 +69,15 @@ class Permutation:
         return self.lst == other.lst
 
     def __str__(self):
-        transpositions = "".join(str(t) for t in self.transpositions)
-        return str(self.lst) + " " + transpositions
+        s = str(self.lst)
+        if self.parent is None:
+            return s
+        return f"{s} == {self.transposition} on {self.parent}"
 
     def __hash__(self):
         return hash(tuple(self.lst))
 
-orig = Permutation(list(range(1, LIST_SIZE+1)), [])
+orig = Permutation(list(range(1, LIST_SIZE+1)), parent=None, transposition=None)
 distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
 
 print("all permutations:")
