@@ -16,13 +16,13 @@ def breadth_first_search(top, *, neighbors):
         q = new_q
     return depth_dict
 
-N = 4
+LIST_SIZE = 4
 
 class Transposition:
     def __init__(self, i, j):
         assert i >= 1
         assert i < j
-        assert j <= N
+        assert j <= LIST_SIZE
         self.i = i
         self.j = j
 
@@ -32,8 +32,8 @@ class Transposition:
 
 def make_transpositions():
     transpositions = []
-    for i in range(N):
-        for j in range(i+1, N):
+    for i in range(LIST_SIZE):
+        for j in range(i+1, LIST_SIZE):
             t = Transposition(i+1, j+1)
             transpositions.append(t)
     return transpositions
@@ -48,7 +48,7 @@ print()
 
 class Permutation:
     def __init__(self, lst, transpositions):
-        assert set(lst) == set(range(1, N+1))
+        assert set(lst) == set(range(1, LIST_SIZE+1))
         self.lst = lst
         self.transpositions = transpositions
         
@@ -72,7 +72,7 @@ class Permutation:
     def __hash__(self):
         return hash(tuple(self.lst))
 
-orig = Permutation(list(range(1, N+1)), [])
+orig = Permutation(list(range(1, LIST_SIZE+1)), [])
 distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
 
 print("all permutations:")
@@ -81,7 +81,7 @@ for p, d in distance.items():
 print()
 
 print("distance counts")
-for i in range(N):
+for i in range(LIST_SIZE):
     print(i, len([d for d in distance.values() if d == i]))
 
 print("</pre>")
