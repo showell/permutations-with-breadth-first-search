@@ -1,5 +1,6 @@
 print("<pre>")
 
+
 def breadth_first_search(top, *, neighbors):
     q = [top]
     depth_dict = dict()
@@ -16,7 +17,9 @@ def breadth_first_search(top, *, neighbors):
         q = new_q
     return depth_dict
 
+
 LIST_SIZE = 4
+
 
 class Transposition:
     def __init__(self, i, j):
@@ -33,11 +36,11 @@ class Transposition:
 def make_transpositions():
     transpositions = []
     for i in range(LIST_SIZE):
-        for j in range(i+1, LIST_SIZE):
-            t = Transposition(i+1, j+1)
+        for j in range(i + 1, LIST_SIZE):
+            t = Transposition(i + 1, j + 1)
             transpositions.append(t)
     return transpositions
-    
+
 
 transpositions = make_transpositions()
 print("all transpositions:")
@@ -46,15 +49,16 @@ for t in transpositions:
 
 print()
 
+
 class Permutation:
     def __init__(self, lst, *, parent, transposition):
         if parent is None:
             assert transposition is None
-        assert set(lst) == set(range(1, LIST_SIZE+1))
+        assert set(lst) == set(range(1, LIST_SIZE + 1))
         self.lst = lst
         self.parent = parent
         self.transposition = transposition
-        
+
     def neighbor(self, t):
         lst = self.lst[:]
         i = lst.index(t.j)
@@ -77,7 +81,8 @@ class Permutation:
     def __hash__(self):
         return hash(tuple(self.lst))
 
-orig = Permutation(list(range(1, LIST_SIZE+1)), parent=None, transposition=None)
+
+orig = Permutation(list(range(1, LIST_SIZE + 1)), parent=None, transposition=None)
 distance = breadth_first_search(orig, neighbors=lambda perm: perm.neighbors())
 
 print("all permutations:")
