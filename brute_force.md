@@ -1,4 +1,6 @@
 <pre>
+starting permuation: [1, 2, 3, 4]
+
 all permutations:
 [1, 2, 3, 4]
   0 ()

@@ -77,6 +77,9 @@ class Permutation:
 orig = Permutation(list(range(1, LIST_SIZE + 1)))
 dct = brute_search(orig, transpositions)
 
+print("starting permuation:", orig)
+print()
+
 print("all permutations:")
 for permutation in sorted(dct):
     lst = sorted(dct[permutation], key=lambda tup: len(tup))
