@@ -45,7 +45,9 @@ def make_transpositions():
             transpositions.append(t)
     return transpositions
 
+
 transpositions = make_transpositions()
+
 
 class Permutation:
     def __init__(self, lst):
@@ -77,7 +79,7 @@ dct = brute_search(orig, transpositions)
 
 print("all permutations:")
 for permutation in sorted(dct):
-    lst = sorted(dct[permutation], key=lambda tup: len(tup)) 
+    lst = sorted(dct[permutation], key=lambda tup: len(tup))
     print(permutation)
     for elem in lst:
         print(" ", len(elem), elem)
