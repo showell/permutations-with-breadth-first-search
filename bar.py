@@ -5,6 +5,7 @@ print("<pre>")
 
 def brute_search(orig, transpositions):
     perm_dict = defaultdict(list)
+    perm_dict[orig].append(())
     for p in transpositions:
         permutation = orig.neighbor(p)
         perm_dict[permutation].append((str(p),))
@@ -14,6 +15,9 @@ def brute_search(orig, transpositions):
             for r in transpositions:
                 permutation = orig.neighbor(p).neighbor(q).neighbor(r)
                 perm_dict[permutation].append((str(p), str(q), str(r)))
+                for s in transpositions:
+                    permutation = orig.neighbor(p).neighbor(q).neighbor(r).neighbor(s)
+                    perm_dict[permutation].append((str(p), str(q), str(r), str(s)))
 
     return perm_dict
 
@@ -77,6 +81,6 @@ for permutation in sorted(dct):
     print(permutation)
     for elem in lst:
         print(" ", len(elem), elem)
-print()
+    print()
 
 print("</pre>")
